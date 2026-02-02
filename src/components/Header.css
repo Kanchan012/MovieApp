@@ -76,3 +76,31 @@
   font-size:large;
   font-weight: 600;
 }
+
+.btn{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.login-btn {
+  background-color: #2563eb;
+  color: white;
+  padding: 10px;
+  width: 120px;
+  border-radius: 10px;
+  font-size: large;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.register-btn {
+  background-color: #10c88b;
+  color: white;
+  font-size: large;
+  padding: 10px;
+  width: 120px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}

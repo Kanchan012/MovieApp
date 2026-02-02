@@ -30,6 +30,12 @@ const Header: React.FC = () => {
           <IoBookmarksSharp className="watchlist-icon" />
           <h1 className="watchlist-text">Watchlist</h1>
         </div>
+
+        <div className="btn">
+            <button className="login-btn">Login</button>
+            <button className="register-btn">Register</button>
+        </div>
+        
       </div>
     </header>
   );
