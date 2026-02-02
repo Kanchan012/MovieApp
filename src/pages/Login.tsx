@@ -1,5 +1,6 @@
 import "./Login.css";
 import loginimg from "../assets/loginimg.png";
+import { NavLink } from "react-router-dom";
 
 function Login() {
   return (
@@ -38,7 +39,7 @@ function Login() {
             </button>
           </form>
           <div className="register-text">
-            Don’t have an account?<span>Register</span>
+            Don’t have an account? <NavLink to="/register"><span>Register</span></NavLink>
           </div>
         </div>
       </div>

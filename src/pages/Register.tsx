@@ -1,11 +1,12 @@
 import "./Register.css";
 import registerimg from "../assets/registerimg.png"
+import { NavLink } from "react-router-dom";
 function Register() {
   return (
       <>
       <div className="register-container">
         <div className="register-form-section">
-          <h2 className="register-title">Welcome Back!</h2>
+          <h2 className="register-title">Welcome to Movie App</h2>
           <form className="register-form">
             <label htmlFor="username" className="register-label">
               Username
@@ -45,7 +46,7 @@ function Register() {
             </button>
           </form>
           <div className="register-text">
-            Don’t have an account?<span>Register</span>
+            Already have an account? <NavLink to="/login"><span>Login</span></NavLink>
           </div>
         </div>
             <div className="register-image-section">
