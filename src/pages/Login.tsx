@@ -7,11 +7,13 @@ function Login() {
       <div className="login-container">
         <div className="login-image-section">
           <img src={loginimg} alt="Login" className="login-image" />
-        </div>  
+        </div>
         <div className="login-form-section">
           <h2 className="login-title">Welcome Back!</h2>
           <form className="login-form">
-            <label htmlFor="email" className="login-label">Email:</label>
+            <label htmlFor="email" className="login-label">
+              Email
+            </label>
             <input
               type="email"
               id="email"
@@ -20,7 +22,9 @@ function Login() {
               required
             />
 
-            <label htmlFor="password" className="login-label">Password:</label>
+            <label htmlFor="password" className="login-label">
+              Password
+            </label>
             <input
               type="password"
               id="password"
@@ -33,6 +37,9 @@ function Login() {
               Login
             </button>
           </form>
+          <div className="register-text">
+            Don’t have an account?<span>Register</span>
+          </div>
         </div>
       </div>
     </>

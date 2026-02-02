@@ -9,7 +9,6 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
       </Routes>
-        <h2>Welcome to MovieApp</h2>
     </>
   );
 }
