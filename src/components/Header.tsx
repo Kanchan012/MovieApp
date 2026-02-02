@@ -2,6 +2,7 @@ import { FaSearch } from "react-icons/fa";
 import { IoBookmarksSharp } from "react-icons/io5";
 import { RiMovie2AiFill } from "react-icons/ri";
 import "./Header.css";
+import { NavLink } from "react-router-dom";
 
 const Header: React.FC = () => {
   return (
@@ -32,7 +33,7 @@ const Header: React.FC = () => {
         </div>
 
         <div className="btn">
-            <button className="login-btn">Login</button>
+            <NavLink to="/login"><button className="login-btn"> Login </button></NavLink>
             <button className="register-btn">Register</button>
         </div>
         
