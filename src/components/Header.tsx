@@ -34,7 +34,7 @@ const Header: React.FC = () => {
 
         <div className="btn">
             <NavLink to="/login"><button className="login-btn"> Login </button></NavLink>
-            <button className="register-btn">Register</button>
+           <NavLink to="/register"><button className="register-btn">Register</button></NavLink> 
         </div>
         
       </div>
