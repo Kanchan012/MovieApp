@@ -1,7 +1,7 @@
 import "./Login.css";
 import loginimg from "../assets/loginimg.png";
 import { NavLink } from "react-router-dom";
-
+import { LuHeartHandshake } from "react-icons/lu";
 function Login() {
   return (
     <>
@@ -10,7 +10,7 @@ function Login() {
           <img src={loginimg} alt="Login" className="login-image" />
         </div>
         <div className="login-form-section">
-          <h2 className="login-title">Welcome Back!</h2>
+          <h2 className="login-title"><LuHeartHandshake />Welcome Back!</h2>
           <form className="login-form">
             <label htmlFor="email" className="login-label">
               Email

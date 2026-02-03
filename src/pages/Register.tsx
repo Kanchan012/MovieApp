@@ -1,12 +1,14 @@
 import "./Register.css";
 import registerimg from "../assets/registerimg.png"
 import { NavLink } from "react-router-dom";
+import { PiHandsPrayingBold } from "react-icons/pi";
+
 function Register() {
   return (
       <>
       <div className="register-container">
         <div className="register-form-section">
-          <h2 className="register-title">Welcome to Movie App</h2>
+          <h2 className="register-title"> <PiHandsPrayingBold  />Welcome to Movie App</h2>
           <form className="register-form">
             <label htmlFor="username" className="register-label">
               Username

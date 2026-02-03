@@ -6,7 +6,8 @@ function Home() {
     <div className='homepage'>
     <div className='home-text'>
         <h1>Welcome to the Movie App!</h1> <br />
-        <p>Explore our free movies and TV, plus discover what's trending across your favorite streaming services.</p>
+        <p>Explore our free movies and TV, plus discover what's trending across your favorite streaming services.</p> <br />
+        <p>Unlimited movies, TV shows, and more</p>
     </div>
 
     <div className='home-img'>

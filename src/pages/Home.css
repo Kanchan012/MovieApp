@@ -14,21 +14,24 @@
 );
 }
 .home-img{
-    width: 900px;
-    margin-left: 20px;
+    width: 800px;
+    margin-left: 10px;
     object-fit: cover;
-    opacity: 0.9;
+    opacity: 0.45;
 }
 .home-text{
     padding: 50px;
     font-size: large;
-    color: white;
+    color: rgb(195, 191, 191);
+    margin-bottom: 55px;
 }
 .home-text h1{
     font-weight: bolder;
     font-size: 3rem;
 }
 .home-text p{
-    font-weight:500;
+    font-size: 25px;
+    font-weight: 800;
+    font-style: italic;
     text-align: justify;
 }
