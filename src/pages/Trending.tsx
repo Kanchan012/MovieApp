@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchTrending } from "../services/tmdbApi"
 import type { TrendingItem } from "../services/tmdbApi";
+import "./Trending.css"
 
 const Trending: React.FC = () => {
   const [movies, setMovies] = useState<TrendingItem[]>([]);
@@ -17,11 +18,9 @@ const Trending: React.FC = () => {
 
   return (
     <div className="trending-container" >
-      <h2>Trending Today</h2>
-
-      <div className="trending-grid" style={{ display: "flex", overflowX: "auto", gap: "20px", scrollbarWidth: "none" }}>
+      <div className="trending-grid" >
         {movies.map((item) => (
-          <div className="trending-card" key={item.id} style={{ minWidth: "200px" }}>
+          <div className="trending-card" key={item.id} >
             <img
               src={
                 item.poster_path
@@ -31,6 +30,7 @@ const Trending: React.FC = () => {
               alt={item.title || item.name || "Movie poster"}
             />
             <h4>{item.title || item.name}</h4>
+            <h4>{item.release_date }</h4>
           </div>
         ))}
       </div>

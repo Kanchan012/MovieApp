@@ -1,0 +1,32 @@
+.trending-grid {
+    display: grid;
+    grid-auto-flow: column;
+    overflow-x: auto;
+    gap: 120px;
+    scrollbar-width: none;
+}
+
+.trending-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.trending-card {
+    min-width: 200px;
+}
+.trending-container{
+ background: linear-gradient(
+  90deg,
+  #6b0f3f 0%,
+  #4e0f52 22%,
+  #2f145f 45%,
+  #16206b 68%,
+  #0b1b57 85%,
+  #071644 100%
+);
+    padding: 20px;
+    color: antiquewhite;
+}
+.trending-container h1{
+    font-size: 2.5rem;
+    margin-left: 45px;
+}

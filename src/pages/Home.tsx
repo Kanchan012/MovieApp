@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom'
 import homeimg from '../assets/homeimg.png'
 import "./Home.css"
 import Trending from './Trending'
@@ -15,7 +16,11 @@ function Home() {
         <img src={homeimg} alt="Home" />
     </div>        
     </div> 
-    <Trending />
+    <div className='trending-container'>
+        <NavLink to="/trending" className="nav-trending"><h1>Trending</h1></NavLink>
+        <Trending />
+    </div>
+   
     </>
   )
 }

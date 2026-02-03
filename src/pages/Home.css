@@ -35,3 +35,8 @@
     font-style: italic;
     text-align: justify;
 }
+.nav-trending{
+    font-weight: bold;
+    color: rgb(195, 191, 191);
+    text-decoration: none;
+}
