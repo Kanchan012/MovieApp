@@ -4,12 +4,12 @@ function Home() {
   return (
     <>
     <div className='homepage'>
-    <div>
-        <h1>Welcome to the Movie App!</h1>
+    <div className='home-text'>
+        <h1>Welcome to the Movie App!</h1> <br />
         <p>Explore our free movies and TV, plus discover what's trending across your favorite streaming services.</p>
     </div>
 
-    <div>
+    <div className='home-img'>
         <img src={homeimg} alt="Home" />
     </div>        
     </div> 

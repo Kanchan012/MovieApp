@@ -1,19 +1,38 @@
 .header {
-  background-color: #111827;
+  background: linear-gradient(
+    90deg,
+    #6b0f3f 0%,
+    #4e0f52 22%,
+    #2f145f 45%,
+    #16206b 68%,
+    #0b1b57 85%,
+    #071644 100%
+  );
   color: white;
-  text-align: center;
 }
 
 .header-container {
   display: flex;
   align-items: center;
-  padding: 1rem 1.75rem;
   gap: 5rem;
+  padding: 1rem 2rem;
+}
+
+.header a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
 }
 
 .logo-section {
   display: flex;
   align-items: center;
+  gap: 0.50rem;
+  cursor: pointer;
 }
 
 .logo-icon {
@@ -23,7 +42,7 @@
 }
 
 .logo-text {
-  font-size: 1.5rem;
+  font-size: 30px;
   font-weight: 700;
 }
 
@@ -32,64 +51,79 @@
   align-items: center;
   background-color: white;
   border-radius: 9999px;
-  padding: 0.25rem 1.5rem;
+  padding: 0.3rem 1.25rem;
 }
 
 .search-btn {
-  background: transparent;
+  background: none;
   border: none;
   cursor: pointer;
 }
 
 .search-icon {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.2rem;
+  height: 1.2rem;
   color: #7a7a7a;
 }
 
 .search-input {
   border: none;
   outline: none;
-  color: black;
-  padding: 0 2rem;
+  padding-left: 0.75rem;
   height: 2rem;
-  border-radius: 9999px;
+  font-size: 0.95rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.75rem;
 }
 
 .nav-item {
-   font-size:large;
+  font-size: 20px;
   font-weight: 600;
+  position: relative;
+}
+
+.nav-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: #ffffff;
+  transition: width 0.3s ease;
+}
+
+.nav-item:hover::after {
+  width: 100%;
 }
 
 .watchlist {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-}
-
-.watchlist-icon {
-  width: 1.25rem;
-  height: 1.25rem;
-}
-
-.watchlist-text {
-  font-size:large;
+  gap: 0.4rem;
   font-weight: 600;
 }
 
-.btn{
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.watchlist-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.btn-group {
+  display: flex;
+  gap: 1rem;
 }
 
 .login-btn {
   background-color: #2563eb;
   color: white;
-  padding: 10px;
-  width: 120px;
+  border: none;
+  padding: 0.6rem 1.5rem;
   border-radius: 10px;
-  font-size: large;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
 }
@@ -97,10 +131,18 @@
 .register-btn {
   background-color: #10c88b;
   color: white;
-  font-size: large;
-  padding: 10px;
-  width: 120px;
+  border: none;
+  padding: 0.6rem 1.5rem;
   border-radius: 10px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #1e4fd8;
+}
+
+.register-btn:hover {
+  background-color: #0ea57a;
 }
