@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Trending from "./pages/Trending";
 import Latest from "./pages/Latest";
 import Watchlist from "./pages/Watchlist";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/latest" element={<Latest />} />
         <Route path="/watchlist" element={<Watchlist />} />
       </Routes>
+      <Footer/>
     </>
   );
 }
