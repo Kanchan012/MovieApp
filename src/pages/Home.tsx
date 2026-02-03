@@ -1,5 +1,6 @@
 import homeimg from '../assets/homeimg.png'
 import "./Home.css"
+import Trending from './Trending'
 function Home() {
   return (
     <>
@@ -14,6 +15,7 @@ function Home() {
         <img src={homeimg} alt="Home" />
     </div>        
     </div> 
+    <Trending />
     </>
   )
 }
