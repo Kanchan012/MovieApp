@@ -7,6 +7,7 @@ import Trending from "./pages/Trending";
 import Latest from "./pages/Latest";
 import Watchlist from "./pages/Watchlist";
 import Footer from "./components/Footer";
+import UpcomingMovies from "./pages/UpcomingMovies";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/trending" element={<Trending />} />
         <Route path="/latest" element={<Latest />} />
         <Route path="/watchlist" element={<Watchlist />} />
+        <Route path="/upcoming" element={<UpcomingMovies/>}/>
       </Routes>
       <Footer/>
     </>

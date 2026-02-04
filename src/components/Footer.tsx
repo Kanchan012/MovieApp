@@ -46,6 +46,9 @@ const Footer: React.FC = () => {
               <li>
                 <a href="/latest">Latest Movies</a>
               </li>
+              <li>
+                <a href="/upcoming">Upcoming Movies</a>
+              </li>
             </ul>
           </div>
 

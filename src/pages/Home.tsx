@@ -45,7 +45,7 @@ function Home() {
         <Latest />
     </div>
     <div className="home-latest-section">
-        <h2 className="section-title">Upcoming Movies</h2>
+       <NavLink to="/upcoming" className="nav-upcoming"><h1>Upcoming Movies</h1></NavLink> <br />
         {loading ? (
           <div className="loader" style={{ margin: '0 auto' }}></div>
         ) : (
