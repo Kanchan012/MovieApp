@@ -1,6 +1,7 @@
 .upcoming-container {
   min-height: 100vh;
-  padding: 120px 5% 50px;
+  padding-top: 20px;
+  padding-bottom: 30px;
   background: linear-gradient(
   90deg,
   #6b0f3f 0%,

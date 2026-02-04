@@ -6,6 +6,7 @@ export interface TrendingItem {
   name?: string;
   release_date?: string;
   poster_path: string | null;
+  popularity:string;
 }
 
 export interface TrendingResponse {
@@ -42,6 +43,7 @@ export interface MovieDetail {
   vote_average: number;
   genres: { id: number; name: string }[];
   runtime: number;
+  popularity: number;
 }
 
 export async function fetchLatestMovies(): Promise<TrendingResponse> {

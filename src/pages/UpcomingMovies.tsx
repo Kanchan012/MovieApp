@@ -70,6 +70,7 @@ function UpcomingMovies() {
                         </div>
                         <div className="upcoming-info">
                             <h3 className="movie-name">{movie.title || movie.name}</h3>
+                            <h3 className="movie-name"> Popularity:{movie.popularity}</h3>
                         </div>
                     </div>
                 ))}
