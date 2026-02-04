@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchLatestMovies, type TrendingItem } from "../services/tmdbApi";
+import "./Latest.css"
 
 function Latest() {
   const [movies, setMovies] = useState<TrendingItem[]>([]);
