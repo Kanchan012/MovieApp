@@ -38,13 +38,13 @@ const Footer: React.FC = () => {
             <h3>Watch</h3>
             <ul>
               <li>
-                <a href="#">Trending Movies</a>
+                <a href="/trending">Trending Movies</a>
               </li>
               <li>
                 <a href="#">TV Shows</a>
               </li>
               <li>
-                <a href="#">Latest Movies</a>
+                <a href="/latest">Latest Movies</a>
               </li>
             </ul>
           </div>
