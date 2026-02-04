@@ -2,7 +2,15 @@
   min-height: 100vh;
   padding-top: 20px;
   padding-bottom: 20px;
-  background: linear-gradient(135deg, #020024 0%, #090979 35%, #00d4ff 100%);
+   background: linear-gradient(
+  90deg,
+  #6b0f3f 0%,
+  #4e0f52 22%,
+  #2f145f 45%,
+  #16206b 68%,
+  #0b1b57 85%,
+  #071644 100%
+);
   color: #ffffff;
 }
 

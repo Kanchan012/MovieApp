@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import homeimg from '../assets/homeimg.png'
 import "./Home.css"
 import Trending from './Trending'
+import Latest from './Latest'
 function Home() {
   return (
     <>
@@ -20,6 +21,10 @@ function Home() {
         <NavLink to="/trending" className="nav-trending"><h1>Trending</h1></NavLink>
         <Trending />
     </div>
+    <div className='nav-trending'>
+        <Latest />
+    </div>
+
    
     </>
   )
