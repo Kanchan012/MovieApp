@@ -4,9 +4,7 @@ export interface TrendingItem {
   id: number;
   title?: string;
   name?: string;
-  release_date?: string;
   poster_path: string | null;
-  popularity:string;
 }
 
 export interface TrendingResponse {
@@ -43,7 +41,6 @@ export interface MovieDetail {
   vote_average: number;
   genres: { id: number; name: string }[];
   runtime: number;
-  popularity: number;
 }
 
 export async function fetchLatestMovies(): Promise<TrendingResponse> {
@@ -58,6 +55,22 @@ export async function fetchLatestMovies(): Promise<TrendingResponse> {
 
   if (!response.ok) {
     throw new Error("TMDB fetch now playing failed");
+  }
+
+  return response.json();
+}
+export async function fetchUpcomingMovies(): Promise<TrendingResponse> {
+  const token = import.meta.env.VITE_TMDB_TOKEN;
+
+  const response = await fetch(`${BASE_URL}/movie/upcoming?language=en-US&page=1`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      accept: "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("TMDB fetch upcoming failed");
   }
 
   return response.json();
