@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     height: 57vh;
-    background: linear-gradient(
+   background: linear-gradient(
   90deg,
   #6b0f3f 0%,
   #4e0f52 22%,
@@ -35,13 +35,9 @@
     font-style: italic;
     text-align: justify;
 }
-.nav-trending{
-    font-weight: bold;
-    color: rgb(195, 191, 191);
-    text-decoration: none;
-    text-align: center;
-}
-.home-latest-section {
+
+/* Movies Sections */
+.home-sections-container {
     padding: 60px 5%;
     background: linear-gradient(
   90deg,
@@ -55,12 +51,38 @@
     color: white;
 }
 
-.nav-upcoming{
-    font-weight: bolder;
-    font-size: larger;
-    color: rgb(195, 191, 191);
+.home-section {
+    margin-bottom: 80px;
+}
+
+.home-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-link {
     text-decoration: none;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 40px;
+    color: aliceblue;
+    gap: 20px;
     text-align: center;
+}
+
+.view-all {
+    font-size: 1rem;
+    -webkit-text-fill-color: #3498db;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.section-link:hover .view-all {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .home-movies-grid {
@@ -101,3 +123,4 @@
 .home-movie-info {
     padding: 15px;
 }
+

@@ -1,80 +1,99 @@
-import { NavLink } from 'react-router-dom'
-import homeimg from '../assets/homeimg.png'
-import "./Home.css"
-import Trending from './Trending'
-import Latest from './Latest'
-import { fetchLatestMovies, type TrendingItem } from '../services/tmdbApi'
 import { useEffect, useState } from 'react'
-
+import homeimg from '../assets/homeimg.png'
+import { fetchLatestMovies, fetchTrending, fetchUpcomingMovies, type TrendingItem } from '../services/tmdbApi'
+import MovieGrid from '../components/common/MovieGrid'
+import { NavLink } from 'react-router-dom'
+import "./Home.css"
 
 function Home() {
-      const [movies, setMovies] = useState<TrendingItem[]>([]);
+  const [trendingMovies, setTrendingMovies] = useState<TrendingItem[]>([]);
+  const [latestMovies, setLatestMovies] = useState<TrendingItem[]>([]);
+  const [upcomingMovies, setUpcomingMovies] = useState<TrendingItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getMovies = async () => {
+    const getAllMovies = async () => {
       try {
-        const data = await fetchLatestMovies();
-        setMovies(data.results.slice(8, 20)); 
+        setLoading(true);
+        const [trending, latest, upcoming] = await Promise.all([
+          fetchTrending(),
+          fetchLatestMovies(),
+          fetchUpcomingMovies()
+        ]);
+
+        setTrendingMovies(trending.results.slice(0, 12));
+        setLatestMovies(latest.results.slice(0, 12));
+        setUpcomingMovies(upcoming.results.slice(0, 12));
       } catch (err) {
         console.error("Failed to fetch movies for home:", err);
       } finally {
         setLoading(false);
       }
     }
-    getMovies();
+    getAllMovies();
   }, []);
+
   return (
     <>
-    <div className='homepage'>
-    <div className='home-text'>
-        <h1>Welcome to the Movie App!</h1> <br />
-        <p>Explore our free movies and TV, plus discover what's trending across your favorite streaming services.</p> <br />
-        <p>Unlimited movies, TV shows, and more</p>
-    </div>
+      <div className='homepage'>
+        <div className='home-text'>
+          <h1>Welcome to the Movie App!</h1> <br />
+          <p>Explore our free movies and TV, plus discover what's trending across your favorite streaming services.</p> <br />
+          <p>Unlimited movies, TV shows, and more</p>
+        </div>
 
-    <div className='home-img'>
-        <img src={homeimg} alt="Home" />
-    </div>        
-    </div> 
-    <div className='trending-container'>
-        <NavLink to="/trending" className="nav-trending"><h1>Trending</h1></NavLink>
-        <Trending />
-    </div>
-    <div className='nav-trending'>
-        <Latest />
-    </div>
-    <div className="home-latest-section">
-       <NavLink to="/upcoming" className="nav-upcoming"><h1>Upcoming Movies</h1></NavLink> <br />
-        {loading ? (
-          <div className="loader" style={{ margin: '0 auto' }}></div>
-        ) : (
-          <div className="home-movies-grid">
-            {movies.map((movie) => (
-              <div key={movie.id} className="home-movie-card">
-                <div className="home-poster-wrapper">
-                  {movie.poster_path ? (
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      alt={movie.title || movie.name}
-                      className="home-movie-poster"
-                    />
-                  ) : (
-                    <div className="no-poster" style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <i className="fas fa-film"></i>
-                    </div>
-                  )}
-                </div>
-                <div className="home-movie-info">
-                  <p className="home-movie-title">{movie.title || movie.name}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+        <div className='home-img'>
+          <img src={homeimg} alt="Home" />
+        </div>
       </div>
 
-   
+      <div className="home-sections-container">
+        {loading ? (
+          <div className="loader-container">
+            <div className="loader" style={{ margin: '100px auto' }}></div>
+          </div>
+        ) : (
+          <>
+            <section className="home-section">
+              <NavLink to="/trending" className="section-link">
+                <h2 className="section-title">Trending Today <span className="view-all">View All →</span></h2>
+              </NavLink>
+              <MovieGrid
+                movies={trendingMovies}
+                gridClassName="home-movies-grid"
+                cardClassName="home-movie-card"
+                imageClassName="home-movie-poster"
+                infoClassName="home-movie-info"
+              />
+            </section>
+
+            <section className="home-section">
+              <NavLink to="/latest" className="section-link">
+                <h2 className="section-title">Latest Releases <span className="view-all">View All →</span></h2>
+              </NavLink>
+              <MovieGrid
+                movies={latestMovies}
+                gridClassName="home-movies-grid"
+                cardClassName="home-movie-card"
+                imageClassName="home-movie-poster"
+                infoClassName="home-movie-info"
+              />
+            </section>
+
+            <section className="home-section">
+             <NavLink to="/upcoming" className="section-link">
+                <h2 className="section-title">Upcoming Movies <span className="view-all">View All →</span></h2>
+              </NavLink>              <MovieGrid
+                movies={upcomingMovies}
+                gridClassName="home-movies-grid"
+                cardClassName="home-movie-card"
+                imageClassName="home-movie-poster"
+                infoClassName="home-movie-info"
+              />
+            </section>
+          </>
+        )}
+      </div>
     </>
   )
 }
