@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { fetchTrending } from "../services/tmdbApi"
+import { fetchTrending } from "../services/tmdbApi";
 import type { TrendingItem } from "../services/tmdbApi";
-import "./Trending.css"
+import MovieGrid from "../components/common/MovieGrid";
+import "./Trending.css";
 
 const Trending: React.FC = () => {
   const [movies, setMovies] = useState<TrendingItem[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchTrending()
@@ -13,27 +15,19 @@ const Trending: React.FC = () => {
       })
       .catch((error) => {
         console.error(error);
+        setError("Failed to fetch trending movies.");
       });
   }, []);
 
+  if (error) return <div className="error-message">{error}</div>;
+
   return (
-    <div className="trending-container" >
-      <div className="trending-grid" >
-        {movies.map((item) => (
-          <div className="trending-card" key={item.id} >
-            <img
-              src={
-                item.poster_path
-                  ? `https://image.tmdb.org/t/p/w300${item.poster_path}`
-                  : "https://via.placeholder.com/300x450?text=No+Image"
-              }
-              alt={item.title || item.name || "Movie poster"}
-            />
-            <h4>{item.title || item.name}</h4>
-            <h4>{item.release_date }</h4>
-          </div>
-        ))}
-      </div>
+    <div className="trending-container">
+      <MovieGrid
+        movies={movies}
+        gridClassName="trending-grid"
+        cardClassName="trending-card"
+      />
     </div>
   );
 };
