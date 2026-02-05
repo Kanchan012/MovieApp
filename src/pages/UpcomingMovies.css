@@ -1,8 +1,8 @@
 .upcoming-container {
   min-height: 100vh;
   padding-top: 20px;
-  padding-bottom: 30px;
-  background: linear-gradient(
+  padding-bottom: 20px;
+   background: linear-gradient(
   90deg,
   #6b0f3f 0%,
   #4e0f52 22%,
@@ -12,6 +12,21 @@
   #071644 100%
 );
   color: #ffffff;
+}
+
+.upcoming-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.upcoming-header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #fff, #888);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
 }
 
 .upcoming-title {

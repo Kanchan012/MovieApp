@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { type TrendingItem } from "../services/tmdbApi";
+import { fetchUpcomingMovies, type TrendingItem } from "../services/tmdbApi";
+import MovieGrid from "../components/common/MovieGrid";
 import "./UpcomingMovies.css";
 
 function UpcomingMovies() {
@@ -8,23 +9,10 @@ function UpcomingMovies() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const fetchUpcoming = async () => {
-            const token = import.meta.env.VITE_TMDB_TOKEN;
-            const options = {
-                method: 'GET',
-                headers: {
-                    accept: 'application/json',
-                    Authorization: `Bearer ${token}`
-                }
-            };
-
+        const getUpcoming = async () => {
             try {
                 setLoading(true);
-                const response = await fetch('https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1', options);
-                if (!response.ok) {
-                    throw new Error("Failed to fetch upcoming movies");
-                }
-                const data = await response.json();
+                const data = await fetchUpcomingMovies();
                 setMovies(data.results);
             } catch (err) {
                 setError("Error loading upcoming movies.");
@@ -34,7 +22,7 @@ function UpcomingMovies() {
             }
         };
 
-        fetchUpcoming();
+        getUpcoming();
     }, []);
 
     if (loading) {
@@ -51,30 +39,17 @@ function UpcomingMovies() {
 
     return (
         <div className="upcoming-container">
-            <h1 className="upcoming-title">Upcoming Movies</h1>
-            <div className="upcoming-grid">
-                {movies.map((movie) => (
-                    <div key={movie.id} className="upcoming-card">
-                        <div className="poster-container">
-                            {movie.poster_path ? (
-                                <img
-                                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                                    alt={movie.title || movie.name}
-                                    className="upcoming-poster"
-                                />
-                            ) : (
-                                <div className="no-poster">
-                                    <i className="fas fa-film"></i>
-                                </div>
-                            )}
-                        </div>
-                        <div className="upcoming-info">
-                            <h3 className="movie-name">{movie.title || movie.name}</h3>
-                            <h3 className="movie-name"> Popularity:{movie.popularity}</h3>
-                        </div>
-                    </div>
-                ))}
-            </div>
+        <header className="upcoming-header">
+        <h1>Upcoming Movies</h1>
+      </header>
+        <MovieGrid
+            movies={movies}
+            containerClassName="upcoming-container"
+            gridClassName="upcoming-grid"
+            cardClassName="upcoming-card"
+            imageClassName="upcoming-poster"
+            infoClassName="upcoming-info"
+        />
         </div>
     );
 }
