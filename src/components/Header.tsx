@@ -1,6 +1,6 @@
 import { FaSearch } from "react-icons/fa";
 import { IoBookmarksSharp } from "react-icons/io5";
-import { RiMovie2AiFill } from "react-icons/ri";
+import Logo from "./common/Logo";
 import { NavLink } from "react-router-dom";
 import "./Header.css";
 
@@ -9,10 +9,7 @@ const Header: React.FC = () => {
     <header className="header">
       <div className="header-container">
         <NavLink to="/home" className="logo-link">
-          <div className="logo-section">
-            <RiMovie2AiFill className="logo-icon" />
-            <h1 className="logo-text">MovieApp</h1>
-          </div>
+          <Logo />
         </NavLink>
 
         <div className="search-box">
