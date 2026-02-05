@@ -1,22 +1,18 @@
 import React from "react";
 import "./Footer.css";
-import { RiMovie2AiFill } from "react-icons/ri";
+import Logo from "./common/Logo";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <div className="footer-brand">
-          <div className="footer-logo">
-            <RiMovie2AiFill className="logo-icon" />
-            <span className="logo-text">MovieApp</span>
-          </div>
-          <p className="footer-tagline">
-            Your ultimate destination for movies, TV shows, and entertainment. <br />
-            Enjoy Watching Movies
-          </p>
-        </div>
+         <div className="footer-brand">
+                    <Logo className="footer-logo" />
+                    <p className="footer-tagline">
+                        Your ultimate destination for movies, TV shows, and entertainment.
+                    </p>
+                </div>
 
         <div className="footer-links">
           <div className="footer-column">
