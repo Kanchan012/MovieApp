@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchLatestMovies, type TrendingItem } from "../services/tmdbApi";
-import "./Latest.css"
+import MovieGrid from "../components/common/MovieGrid";
+import "./Latest.css";
 
 function Latest() {
   const [movies, setMovies] = useState<TrendingItem[]>([]);
@@ -52,33 +53,13 @@ function Latest() {
         <p>Stay updated with the newest movies in theaters</p>
       </header>
 
-      <div className="movies-grid">
-        {movies.map((movie) => (
-          <div key={movie.id} className="movie-card">
-            <div className="poster-wrapper">
-              {movie.poster_path ? (
-                <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title || movie.name}
-                  className="movie-poster"
-                />
-              ) : (
-                <div className="no-poster">
-                  <i className="fas fa-film"></i>
-                </div>
-              )}
-            </div>
-
-            <div className="movie-info">
-              <h3 className="movie-title">{movie.title || movie.name}</h3>
-              <div className="movie-date">
-                <i className="far fa-calendar"></i>
-                <span>Release: Recently Added</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <MovieGrid
+        movies={movies}
+        gridClassName="movies-grid"
+        cardClassName="movie-card"
+        imageClassName="movie-poster"
+        infoClassName="movie-info"
+      />
     </div>
   );
 }
