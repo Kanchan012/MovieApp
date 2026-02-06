@@ -8,6 +8,7 @@ import Latest from "./pages/Latest";
 import Watchlist from "./pages/Watchlist";
 import Footer from "./components/Footer";
 import UpcomingMovies from "./pages/UpcomingMovies";
+import MovieDetails from "./pages/MovieDetails";
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
         <Route path="/latest" element={<Latest />} />
         <Route path="/watchlist" element={<Watchlist />} />
         <Route path="/upcoming" element={<UpcomingMovies/>}/>
+        <Route path="/movie/:id" element={<MovieDetails />} />
+
       </Routes>
       <Footer/>
     </>
