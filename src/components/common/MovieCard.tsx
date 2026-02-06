@@ -1,5 +1,6 @@
 import React from 'react';
 import type { TrendingItem } from '../../services/tmdbApi';
+import { Link } from 'react-router-dom';
 
 interface MovieCardProps {
     movie: TrendingItem;
@@ -14,7 +15,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, className, imageClassName,
         : "https://via.placeholder.com/300x450?text=No+Image";
 
     return (
-        <div className={className}>
+         <Link to={`/movie/${movie.id}`} className={className} style={{ textDecoration: 'none', color: 'inherit' }}>
             <div className="poster-wrapper">
                 <img
                     src={imageUrl}
@@ -25,7 +26,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, className, imageClassName,
             <div className={infoClassName}>
                 <h4 className="movie-title">{movie.title || movie.name}</h4>
             </div>
-        </div>
+        </Link>
     );
 };
 
