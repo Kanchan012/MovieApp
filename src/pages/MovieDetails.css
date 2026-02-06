@@ -3,6 +3,7 @@
     color: white;
     position: relative;
     background-color: #0f172a;
+    border: 2px solid #0f172a;
 }
 
 .backdrop-container {
