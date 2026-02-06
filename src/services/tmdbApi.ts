@@ -43,6 +43,23 @@ export interface MovieDetail {
   runtime: number;
 }
 
+export interface Review {
+  id: string;
+  author: string;
+  content: string;
+  created_at: string;
+  author_details: {
+    name: string;
+    username: string;
+    avatar_path: string | null;
+    rating: number | null;
+  };
+}
+
+export interface MovieReviewsResponse {
+  results: Review[];
+}
+
 export async function fetchLatestMovies(): Promise<TrendingResponse> {
   const token = import.meta.env.VITE_TMDB_TOKEN;
 
@@ -75,3 +92,37 @@ export async function fetchUpcomingMovies(): Promise<TrendingResponse> {
 
   return response.json();
 }
+export async function fetchMovieDetails(movieId: string): Promise<MovieDetail> {
+  const token = import.meta.env.VITE_TMDB_TOKEN;
+
+  const response = await fetch(`${BASE_URL}/movie/${movieId}?language=en-US`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      accept: "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("TMDB fetch movie details failed");
+  }
+
+  return response.json();
+}
+
+export async function fetchMovieReviews(movieId: string): Promise<MovieReviewsResponse> {
+  const token = import.meta.env.VITE_TMDB_TOKEN;
+
+  const response = await fetch(`${BASE_URL}/movie/${movieId}/reviews?language=en-US&page=1`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      accept: "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("TMDB fetch movie reviews failed");
+  }
+
+  return response.json();
+}
+
