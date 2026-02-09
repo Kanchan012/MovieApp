@@ -9,6 +9,7 @@ import Watchlist from "./pages/Watchlist";
 import Footer from "./components/Footer";
 import UpcomingMovies from "./pages/UpcomingMovies";
 import MovieDetails from "./pages/MovieDetails";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
         <Route path="/watchlist" element={<Watchlist />} />
         <Route path="/upcoming" element={<UpcomingMovies/>}/>
         <Route path="/movie/:id" element={<MovieDetails />} />
-
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       <Footer/>
     </>
