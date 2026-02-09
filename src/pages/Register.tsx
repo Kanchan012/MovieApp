@@ -1,10 +1,39 @@
+import { useState } from "react";
 import "./Register.css";
 import registerimg from "../assets/registerimg.png"
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { PiHandsPrayingBold } from "react-icons/pi";
 import AuthLayout from "../components/common/AuthLayout";
 
 function Register() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({ ...prev, [id]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const userData = {
+      name: formData.username,
+      email: formData.email,
+      password: formData.password, 
+      moviesWatched: 0,
+      watchlistCount: 0,
+      avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(formData.username)}&background=2e7d32&color=fff&size=250` 
+    };
+
+    localStorage.setItem('userData', JSON.stringify(userData));
+    alert("Registration Successful!");
+    navigate('/login');
+  };
+
   return (
     <AuthLayout
       image={registerimg}
@@ -18,7 +47,7 @@ function Register() {
       formClassName="register-form-wrapper"
       reverse={true}
     >
-      <form className="register-form">
+      <form className="register-form" onSubmit={handleSubmit}>
         <label htmlFor="username" className="register-label">
           Username
         </label>
@@ -27,6 +56,8 @@ function Register() {
           id="username"
           className="register-input"
           placeholder="Enter username"
+          value={formData.username}
+          onChange={handleChange}
           required
         />
 
@@ -38,6 +69,8 @@ function Register() {
           id="email"
           className="register-input"
           placeholder="Enter your email"
+          value={formData.email}
+          onChange={handleChange}
           required
         />
 
@@ -49,6 +82,8 @@ function Register() {
           id="password"
           className="register-input"
           placeholder="Enter your password"
+          value={formData.password}
+          onChange={handleChange}
           required
         />
 
