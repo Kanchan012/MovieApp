@@ -146,3 +146,46 @@
 .register-btn:hover {
   background-color: #0ea57a;
 }
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #fff;
+  transition: opacity 0.3s ease;
+}
+
+.profile-link:hover {
+  opacity: 0.8;
+}
+
+.profile-icon {
+  font-size: 1.5rem;
+}
+
+.header-profile-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.logout-header-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-header-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #fc8181;
+  color: #fc8181;
+}
