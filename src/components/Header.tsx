@@ -1,10 +1,30 @@
 import { FaSearch } from "react-icons/fa";
 import { IoBookmarksSharp } from "react-icons/io5";
 import Logo from "./common/Logo";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "./Header.css";
 
 const Header: React.FC = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAuth = () => {
+      setIsLoggedIn(localStorage.getItem('isLoggedIn') === 'true');
+    };
+
+    checkAuth();
+    window.addEventListener('authChange', checkAuth);
+    return () => window.removeEventListener('authChange', checkAuth);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    setIsLoggedIn(false);
+    navigate('/login');
+  };
+
   return (
     <header className="header">
       <div className="header-container">
@@ -38,12 +58,28 @@ const Header: React.FC = () => {
         </NavLink>
 
         <div className="btn-group">
-          <NavLink to="/login">
-            <button className="login-btn">Login</button>
-          </NavLink>
-          <NavLink to="/register">
-            <button className="register-btn">Register</button>
-          </NavLink>
+          {isLoggedIn ? (
+            <>
+              <NavLink to="/profile" className="profile-link">
+                <img
+                  src={JSON.parse(localStorage.getItem('userData') || '{}').avatar || ''}
+                  alt="Profile"
+                  className="header-profile-avatar"
+                />
+                <span>Profile</span>
+              </NavLink>
+              <button className="logout-header-btn" onClick={handleLogout}>Logout</button>
+            </>
+          ) : (
+            <>
+              <NavLink to="/login">
+                <button className="login-btn">Login</button>
+              </NavLink>
+              <NavLink to="/register">
+                <button className="register-btn">Register</button>
+              </NavLink>
+            </>
+          )}
         </div>
 
       </div>
