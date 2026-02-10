@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchMovieDetails, fetchMovieReviews, type MovieDetail, type Review } from '../services/tmdbApi';
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaBookmark, FaRegBookmark } from "react-icons/fa";
+import { useWatchlist } from '../context/WatchlistContext';
 import './MovieDetails.css';
 
 const MovieDetails = () => {
@@ -11,6 +12,8 @@ const MovieDetails = () => {
     const [reviews, setReviews] = useState<Review[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+
+    const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
 
     useEffect(() => {
         const getDetails = async () => {
@@ -52,6 +55,16 @@ const MovieDetails = () => {
         );
     }
 
+    const isSaved = isInWatchlist(movie.id);
+
+    const handleWatchlistToggle = () => {
+        if (isSaved) {
+            removeFromWatchlist(movie.id);
+        } else {
+            addToWatchlist(movie);
+        }
+    };
+
     const backdropUrl = movie.backdrop_path
         ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
         : "https://via.placeholder.com/1920x1080?text=No+Backdrop+Available";
@@ -83,6 +96,14 @@ const MovieDetails = () => {
                         <span className="release-year">{movie.release_date?.split('-')[0]}</span>
                         <span className="runtime">{movie.runtime} min</span>
                         <span className="rating"><FaStar />{movie.vote_average.toFixed(1)}/10</span>
+                        <button
+                            className={`watchlist-toggle-btn ${isSaved ? 'saved' : ''}`}
+                            onClick={handleWatchlistToggle}
+                            title={isSaved ? "Remove from Watchlist" : "Add to Watchlist"}
+                        >
+                            {isSaved ? <FaBookmark /> : <FaRegBookmark />}
+                            <span>{isSaved ? "In Watchlist" : "Add to Watchlist"}</span>
+                        </button>
                     </div>
 
                     <div className="overview-section">
@@ -127,7 +148,7 @@ const MovieDetails = () => {
                                     </div>
                                     {review.author_details.rating && (
                                         <div className="review-rating"><FaStar />
-{review.author_details.rating}/10</div>
+                                            {review.author_details.rating}/10</div>
                                     )}
                                 </div>
                                 <div className="review-content">
