@@ -10,10 +10,11 @@ import Footer from "./components/Footer";
 import UpcomingMovies from "./pages/UpcomingMovies";
 import MovieDetails from "./pages/MovieDetails";
 import Profile from "./pages/Profile";
+import { WatchlistProvider } from "./context/WatchlistContext";
 
 function App() {
   return (
-    <>
+    <WatchlistProvider>
       <Header />
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -22,12 +23,12 @@ function App() {
         <Route path="/trending" element={<Trending />} />
         <Route path="/latest" element={<Latest />} />
         <Route path="/watchlist" element={<Watchlist />} />
-        <Route path="/upcoming" element={<UpcomingMovies/>}/>
+        <Route path="/upcoming" element={<UpcomingMovies />} />
         <Route path="/movie/:id" element={<MovieDetails />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
-      <Footer/>
-    </>
+      <Footer />
+    </WatchlistProvider>
   );
 }
 
