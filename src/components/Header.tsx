@@ -3,11 +3,13 @@ import { IoBookmarksSharp } from "react-icons/io5";
 import Logo from "./common/Logo";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useWatchlist } from "../context/WatchlistContext";
 import "./Header.css";
 
 const Header: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { watchlist } = useWatchlist();
 
   useEffect(() => {
     const checkAuth = () => {
@@ -53,7 +55,12 @@ const Header: React.FC = () => {
         </nav>
 
         <NavLink to="/watchlist" className="watchlist">
-          <IoBookmarksSharp className="watchlist-icon" />
+          <div className="watchlist-icon-container">
+            <IoBookmarksSharp className="watchlist-icon" />
+            {watchlist.length > 0 && (
+              <span className="watchlist-count">{watchlist.length}</span>
+            )}
+          </div>
           <span className="watchlist-text">Watchlist</span>
         </NavLink>
 
