@@ -1,6 +1,7 @@
 import { useAppSelector } from "../redux/hooks";
 import MovieGrid from "../components/common/MovieGrid";
 import type { TrendingItem } from "../services/tmdbApi";
+import { BiMoviePlay } from "react-icons/bi";
 import "./Watchlist.css";
 
 const Watchlist = () => {
@@ -33,7 +34,7 @@ const Watchlist = () => {
           />
         ) : (
           <div className="empty-watchlist">
-            <div className="empty-icon">🎬</div>
+            <div className="empty-icon"><BiMoviePlay /></div>
             <p>Ready to find your next favorite movie?</p>
             <a href="/home" className="browse-btn">Browse Movies</a>
           </div>

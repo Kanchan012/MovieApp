@@ -1,36 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import homeimg from '../assets/homeimg.png'
-import { fetchLatestMovies, fetchTrending, fetchUpcomingMovies, type TrendingItem } from '../services/tmdbApi'
 import MovieGrid from '../components/common/MovieGrid'
 import { NavLink } from 'react-router-dom'
+import { useMovies } from '../redux/useMovies'
 import "./Home.css"
 
 function Home() {
-  const [trendingMovies, setTrendingMovies] = useState<TrendingItem[]>([]);
-  const [latestMovies, setLatestMovies] = useState<TrendingItem[]>([]);
-  const [upcomingMovies, setUpcomingMovies] = useState<TrendingItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { trending, latest, upcoming, loading, getHomeMovies } = useMovies();
 
   useEffect(() => {
-    const getAllMovies = async () => {
-      try {
-        setLoading(true);
-        const [trending, latest, upcoming] = await Promise.all([
-          fetchTrending(),
-          fetchLatestMovies(),
-          fetchUpcomingMovies()
-        ]);
-
-        setTrendingMovies(trending.results.slice(0, 12));
-        setLatestMovies(latest.results.slice(0, 12));
-        setUpcomingMovies(upcoming.results.slice(0, 12));
-      } catch (err) {
-        console.error("Failed to fetch movies for home:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    getAllMovies();
+    getHomeMovies();
   }, []);
 
   return (
@@ -59,7 +38,7 @@ function Home() {
                 <h2 className="section-title">Trending Today <span className="view-all">View All →</span></h2>
               </NavLink>
               <MovieGrid
-                movies={trendingMovies}
+                movies={trending}
                 gridClassName="home-movies-grid"
                 cardClassName="home-movie-card"
                 imageClassName="home-movie-poster"
@@ -72,7 +51,7 @@ function Home() {
                 <h2 className="section-title">Latest Releases <span className="view-all">View All →</span></h2>
               </NavLink>
               <MovieGrid
-                movies={latestMovies}
+                movies={latest}
                 gridClassName="home-movies-grid"
                 cardClassName="home-movie-card"
                 imageClassName="home-movie-poster"
@@ -81,10 +60,10 @@ function Home() {
             </section>
 
             <section className="home-section">
-             <NavLink to="/upcoming" className="section-link">
+              <NavLink to="/upcoming" className="section-link">
                 <h2 className="section-title">Upcoming Movies <span className="view-all">View All →</span></h2>
               </NavLink>              <MovieGrid
-                movies={upcomingMovies}
+                movies={upcoming}
                 gridClassName="home-movies-grid"
                 cardClassName="home-movie-card"
                 imageClassName="home-movie-poster"
