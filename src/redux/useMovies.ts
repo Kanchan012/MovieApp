@@ -12,7 +12,7 @@ export const useMovies = () => {
             const data = await fetchTrending();
             dispatch(setTrending(data.results));
             dispatch(setError(null));
-        } catch (err) {
+        } catch {
             dispatch(setError("Failed to fetch trending movies."));
         } finally {
             dispatch(setLoading(false));
@@ -25,7 +25,7 @@ export const useMovies = () => {
             const data = await fetchLatestMovies();
             dispatch(setLatest(data.results));
             dispatch(setError(null));
-        } catch (err) {
+        } catch {
             dispatch(setError("Failed to fetch latest movies."));
         } finally {
             dispatch(setLoading(false));
@@ -38,7 +38,7 @@ export const useMovies = () => {
             const data = await fetchUpcomingMovies();
             dispatch(setUpcoming(data.results));
             dispatch(setError(null));
-        } catch (err) {
+        } catch {
             dispatch(setError("Failed to fetch upcoming movies."));
         } finally {
             dispatch(setLoading(false));
@@ -58,7 +58,7 @@ export const useMovies = () => {
             dispatch(setLatest(latest.results.slice(0, 12)));
             dispatch(setUpcoming(upcoming.results.slice(0, 12)));
             dispatch(setError(null));
-        } catch (err) {
+        } catch {
             dispatch(setError("Failed to load movies."));
         } finally {
             dispatch(setLoading(false));
