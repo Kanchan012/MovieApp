@@ -3,13 +3,13 @@ import { IoBookmarksSharp } from "react-icons/io5";
 import Logo from "./common/Logo";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useWatchlist } from "../context/WatchlistContext";
+import { useAppSelector } from "../redux/hooks";
 import "./Header.css";
 
 const Header: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const navigate = useNavigate();
-  const { watchlist } = useWatchlist();
+  const watchlist = useAppSelector((state) => state.watchlist.items);
 
   useEffect(() => {
     const checkAuth = () => {
