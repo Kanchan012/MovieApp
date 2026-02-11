@@ -1,35 +1,19 @@
-import { useEffect, useState } from "react";
-import { fetchLatestMovies, type TrendingItem } from "../services/tmdbApi";
+import { useEffect } from "react";
+import { useMovies } from "../redux/useMovies";
 import MovieGrid from "../components/common/MovieGrid";
 import "./Latest.css";
 
 function Latest() {
-  const [movies, setMovies] = useState<TrendingItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { latest, loading, error, getLatest } = useMovies();
 
   useEffect(() => {
-    const getLatestMovies = async () => {
-      try {
-        setLoading(true);
-        const data = await fetchLatestMovies();
-        setMovies(data.results);
-        setError(null);
-      } catch (err) {
-        setError("Failed to load the latest movies. Please try again later.");
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getLatestMovies();
+    getLatest();
   }, []);
 
   if (loading) {
     return (
       <div className="loading-container">
-        <div className="loader">loading...</div>
+        <div className="loader"></div>
       </div>
     );
   }
@@ -39,7 +23,7 @@ function Latest() {
       <div className="error-container">
         <h2>Oops!</h2>
         <p>{error}</p>
-        <button onClick={() => window.location.reload()} className="btn-primary">
+        <button onClick={() => getLatest()} className="btn-primary">
           Try Again
         </button>
       </div>
@@ -54,7 +38,7 @@ function Latest() {
       </header>
 
       <MovieGrid
-        movies={movies}
+        movies={latest}
         gridClassName="movies-grid"
         cardClassName="movie-card"
         imageClassName="movie-poster"
