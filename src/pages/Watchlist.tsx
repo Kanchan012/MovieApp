@@ -1,10 +1,10 @@
-import { useWatchlist } from "../context/WatchlistContext";
+import { useAppSelector } from "../redux/hooks";
 import MovieGrid from "../components/common/MovieGrid";
 import type { TrendingItem } from "../services/tmdbApi";
 import "./Watchlist.css";
 
 const Watchlist = () => {
-  const { watchlist } = useWatchlist();
+  const watchlist = useAppSelector((state) => state.watchlist.items);
   const watchlistAsTrendingItems: TrendingItem[] = watchlist.map((movie) => ({
     id: movie.id,
     title: movie.title,
