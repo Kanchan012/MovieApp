@@ -1,33 +1,31 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchMovieDetails, fetchMovieReviews, type MovieDetail, type Review } from '../services/tmdbApi';
+import { fetchMovieDetails, type MovieDetail } from '../services/tmdbApi';
 import { FaStar, FaBookmark, FaRegBookmark } from "react-icons/fa";
-import { useWatchlist } from '../context/WatchlistContext';
+import { useWatchlistActions } from '../redux/useWatchlistActions';
+import { useReviews } from '../redux/useReviews';
 import './MovieDetails.css';
 
 const MovieDetails = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const [movie, setMovie] = useState<MovieDetail | null>(null);
-    const [reviews, setReviews] = useState<Review[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const { addToWatchlist, removeFromWatchlist, isInWatchlist } = useWatchlist();
+    const { toggleWatchlist, isInWatchlist } = useWatchlistActions();
+    const { reviews, getReviews } = useReviews(id);
 
     useEffect(() => {
         const getDetails = async () => {
             if (!id) return;
             try {
                 setLoading(true);
-                const [movieData, reviewsData] = await Promise.all([
-                    fetchMovieDetails(id),
-                    fetchMovieReviews(id)
-                ]);
+                const movieData = await fetchMovieDetails(id);
                 setMovie(movieData);
-                setReviews(reviewsData.results);
+                await getReviews(id);
             } catch (err) {
-                console.error("Failed to fetch movie details or reviews:", err);
+                console.error("Failed to fetch movie details:", err);
                 setError("Failed to load movie details. Please try again later.");
             } finally {
                 setLoading(false);
@@ -58,11 +56,7 @@ const MovieDetails = () => {
     const isSaved = isInWatchlist(movie.id);
 
     const handleWatchlistToggle = () => {
-        if (isSaved) {
-            removeFromWatchlist(movie.id);
-        } else {
-            addToWatchlist(movie);
-        }
+        toggleWatchlist(movie);
     };
 
     const backdropUrl = movie.backdrop_path
