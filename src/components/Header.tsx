@@ -3,12 +3,15 @@ import { IoBookmarksSharp } from "react-icons/io5";
 import Logo from "./common/Logo";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useAppSelector } from "../redux/hooks";
+import { useAppSelector, useAppDispatch  } from "../redux/hooks";
+import { setSearchQuery } from "../redux/slices/searchSlice";
 import "./Header.css";
 
 const Header: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [searchQuery, setSearchQueryLocal] = useState("");
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const watchlist = useAppSelector((state) => state.watchlist.items);
 
   useEffect(() => {
@@ -27,6 +30,13 @@ const Header: React.FC = () => {
     navigate('/login');
   };
 
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      dispatch(setSearchQuery(searchQuery));
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+    }
+  };
   return (
     <header className="header">
       <div className="header-container">
@@ -34,16 +44,19 @@ const Header: React.FC = () => {
           <Logo />
         </NavLink>
 
-        <div className="search-box">
-          <button className="search-btn">
+        <form className="search-box" onSubmit={handleSearch}>
+          <button type="submit" className="search-btn">
             <FaSearch className="search-icon" />
           </button>
           <input
             type="text"
-            placeholder="Search for anything"
+            placeholder="Search for movies"
             className="search-input"
+            value={searchQuery}
+            onChange={(e) => setSearchQueryLocal(e.target.value)}
           />
-        </div>
+        </form>
+
 
         <nav className="nav-links">
           <NavLink to="/trending" className="nav-item">
