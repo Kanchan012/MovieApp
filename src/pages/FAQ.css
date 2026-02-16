@@ -1,8 +1,4 @@
-.page-title{
-    text-align: center;
-    margin-top: -50px;
-}
-.contact-page {
+.faq-page {
   min-height: 80vh;
   padding: 120px 5% 80px;
   background: linear-gradient(
@@ -14,102 +10,38 @@
   color: white;
 }
 
-.contact-container {
-  max-width: 1000px;
+.faq-container {
+  max-width: 800px;
   margin: 0 auto;
 }
 
-.contact-grid {
+.faq-list {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 80px;
-  margin-top: 40px;
+  flex-direction: column;
+  gap: 25px;
 }
 
-.contact-info h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-.contact-info > p {
-  color: #a0a0a0;
-  margin-bottom: 40px;
-}
-
-.info-item {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 30px;
-}
-
-.info-icon {
-  font-size: 1.5rem;
-  color: #e50914;
-  margin-top: 5px;
-}
-
-.info-item h4 {
-  font-size: 1.1rem;
-  margin-bottom: 5px;
-}
-
-.info-item p {
-  color: #888;
-}
-
-.contact-form {
+.faq-item {
   background: rgba(255, 255, 255, 0.03);
-  padding: 40px;
-  border-radius: 20px;
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  width: 40%;
+  padding: 30px;
+  border-radius: 15px;
+  transition: border-color 0.3s ease;
 }
 
-.form-group {
-  margin-bottom: 25px;
+.faq-item:hover {
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
+.faq-item h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.faq-item p {
   color: #a0a0a0;
-  font-size: 0.9rem;
+  line-height: 1.6;
+  font-size: 1.1rem;
 }
-
-.form-group input, .form-group textarea {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 12px 4px;
-  border-radius: 8px;
-  color: white;
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-.form-group input:focus, .form-group textarea:focus {
-  border-color: #e50914;
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.send-btn {
-  width: 100%;
-  background: #e50914;
-  color: white;
-  border: none;
-  padding: 15px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-left: 20px;
-}
-
-.send-btn:hover {
-  background: #ff0a16;
-  transform: translateY(-2px);
-}
-
-
