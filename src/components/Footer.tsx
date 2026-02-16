@@ -1,31 +1,68 @@
-import React from "react";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import "./Footer.css";
 import Logo from "./common/Logo";
-import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaLinkedin, FaPaperPlane } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const Footer: React.FC = () => {
+  const [email, setEmail] = useState("");
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email.trim()) {
+      if (!email.toLowerCase().endsWith("@gmail.com")) {
+        toast.error("Please enter a valid Gmail address (@gmail.com)");
+        return;
+      }
+      toast.success(`Subscription successful! We'll alert ${email} for new movies.`);
+      setEmail("");
+    }
+  };
+
   return (
     <footer className="footer">
+      <div className="newsletter-section">
+        <div className="newsletter-content">
+          <div className="newsletter-text">
+            <h3>Join the Movie World</h3>
+            <p>Get exclusive updates on the latest releases and trending hits</p>
+          </div>
+          <form className="newsletter-form" onSubmit={handleSubscribe}>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <button type="submit" className="subscribe-btn">
+              <FaPaperPlane /> Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+
       <div className="footer-content">
-         <div className="footer-brand">
-                    <Logo className="footer-logo" />
-                    <p className="footer-tagline">
-                        Your ultimate destination for movies, TV shows, and entertainment.
-                    </p>
-                </div>
+        <div className="footer-brand">
+          <Logo className="footer-logo" />
+          <p className="footer-tagline">
+            Your ultimate destination for movies, TV shows, and entertainment.
+          </p>
+        </div>
 
         <div className="footer-links">
           <div className="footer-column">
             <h3>Company</h3>
             <ul>
               <li>
-                <a href="#">About Us</a>
+                <NavLink to="/tech-stack">Tech Stack</NavLink>
               </li>
               <li>
-                <a href="#">Careers</a>
+                <NavLink to="/faq">FAQ</NavLink>
               </li>
               <li>
-                <a href="#">Our Culture</a>
+                <NavLink to="/contact">Contact Us</NavLink>
               </li>
             </ul>
           </div>
@@ -34,16 +71,16 @@ const Footer: React.FC = () => {
             <h3>Watch</h3>
             <ul>
               <li>
-                <a href="/trending">Trending Movies</a>
+                <NavLink to="/trending">Trending Movies</NavLink>
               </li>
               <li>
-                <a href="#">TV Shows</a>
+                <NavLink to="#">TV Shows</NavLink>
               </li>
               <li>
-                <a href="/latest">Latest Movies</a>
+                <NavLink to="/latest">Latest Movies</NavLink>
               </li>
               <li>
-                <a href="/upcoming">Upcoming Movies</a>
+                <NavLink to="/upcoming">Upcoming Movies</NavLink>
               </li>
             </ul>
           </div>
@@ -52,13 +89,13 @@ const Footer: React.FC = () => {
             <h3>Support</h3>
             <ul>
               <li>
-                <a href="#">Community Guidelines</a>
+                <NavLink to="#">Community Guidelines</NavLink>
               </li>
               <li>
-                <a href="#">Terms of Service</a>
+                <NavLink to="#">Terms of Service</NavLink>
               </li>
               <li>
-                <a href="#">Privacy Policy</a>
+                <NavLink to="#">Privacy Policy</NavLink>
               </li>
             </ul>
           </div>
@@ -66,14 +103,14 @@ const Footer: React.FC = () => {
           <div className="footer-column">
             <h3>Connect</h3>
             <div className="social-icons">
-              <a href="https://www.facebook.com">
-                <FaFacebook className="text-blue-600 bg-white border-2 border-gray-300 rounded-full w-5 h-5" />
+              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                <FaFacebook className="social-icon-icon" />
               </a>
-              <a href="https://www.instagram.com">
-                <FaInstagram className="text-blue-600 bg-white border-2 border-gray-300 rounded-full w-5 h-5" />
+              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                <FaInstagram className="social-icon-icon" />
               </a>
-              <a href="https://www.linkedin.com">
-                <FaLinkedin className="text-blue-600 bg-white border-2 border-gray-300 rounded-full w-5 h-5" />
+              <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+                <FaLinkedin className="social-icon-icon" />
               </a>
             </div>
           </div>
@@ -82,7 +119,7 @@ const Footer: React.FC = () => {
 
       <div className="footer-bottom-links">
         <span>
-          &copy; 2026 MovieApp. All rights reserved.
+          &copy; {new Date().getFullYear()} MovieApp. All rights reserved.
         </span>
       </div>
     </footer>
