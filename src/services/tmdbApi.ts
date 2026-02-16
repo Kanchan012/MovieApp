@@ -126,3 +126,23 @@ export async function fetchMovieReviews(movieId: string): Promise<MovieReviewsRe
   return response.json();
 }
 
+export async function searchMovies(query: string): Promise<TrendingResponse> {
+  const token = import.meta.env.VITE_TMDB_TOKEN;
+
+  const response = await fetch(
+    `${BASE_URL}/search/movie?query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=1`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        accept: "application/json",
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("TMDB search movies failed");
+  }
+
+  return response.json();
+}
+
