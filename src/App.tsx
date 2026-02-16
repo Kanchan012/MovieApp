@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import UpcomingMovies from "./pages/UpcomingMovies";
 import MovieDetails from "./pages/MovieDetails";
 import Profile from "./pages/Profile";
+import SearchResults from "./pages/SearchResults";
 import { WatchlistProvider } from "./context/WatchlistContext";
 import { ToastContainer } from "react-toastify";
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/upcoming" element={<UpcomingMovies />} />
         <Route path="/movie/:id" element={<MovieDetails />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/search" element={<SearchResults />} />
       </Routes>
       <Footer />
     </WatchlistProvider>
