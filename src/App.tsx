@@ -11,11 +11,13 @@ import UpcomingMovies from "./pages/UpcomingMovies";
 import MovieDetails from "./pages/MovieDetails";
 import Profile from "./pages/Profile";
 import { WatchlistProvider } from "./context/WatchlistContext";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <WatchlistProvider>
       <Header />
+       <ToastContainer position="top-right" autoClose={1000} theme="dark" />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
