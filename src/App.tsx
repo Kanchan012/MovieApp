@@ -11,6 +11,9 @@ import UpcomingMovies from "./pages/UpcomingMovies";
 import MovieDetails from "./pages/MovieDetails";
 import Profile from "./pages/Profile";
 import SearchResults from "./pages/SearchResults";
+import TechStack from "./pages/TechStack";
+import FAQ from "./pages/FAQ";
+import ContactUs from "./pages/ContactUs";
 import { WatchlistProvider } from "./context/WatchlistContext";
 import { ToastContainer } from "react-toastify";
 
@@ -30,6 +33,9 @@ function App() {
         <Route path="/movie/:id" element={<MovieDetails />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/search" element={<SearchResults />} />
+        <Route path="/tech-stack" element={<TechStack />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/contact" element={<ContactUs />} />
       </Routes>
       <Footer />
     </WatchlistProvider>
