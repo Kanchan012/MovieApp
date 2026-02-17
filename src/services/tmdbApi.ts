@@ -145,4 +145,22 @@ export async function searchMovies(query: string): Promise<TrendingResponse> {
 
   return response.json();
 }
+export async function fetchTVShows(): Promise<TrendingResponse> {
+  const token = import.meta.env.VITE_TMDB_TOKEN;
 
+  const response = await fetch(
+    `${BASE_URL}/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        accept: "application/json",
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("TMDB fetch TV shows failed");
+  }
+
+  return response.json();
+}
