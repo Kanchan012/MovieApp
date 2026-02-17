@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
                 <NavLink to="/trending">Trending Movies</NavLink>
               </li>
               <li>
-                <NavLink to="#">TV Shows</NavLink>
+                <NavLink to="/tv-shows">TV Shows</NavLink>
               </li>
               <li>
                 <NavLink to="/latest">Latest Movies</NavLink>
