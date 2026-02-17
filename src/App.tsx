@@ -16,6 +16,7 @@ import FAQ from "./pages/FAQ";
 import ContactUs from "./pages/ContactUs";
 import TVShows from "./pages/TVShows";
 import CommunityGuidelines from "./pages/CommunityGuidelines";
+import TermsOfService from "./pages/TermsOfService";
 import { WatchlistProvider } from "./context/WatchlistContext";
 import { ToastContainer } from "react-toastify";
 
@@ -40,6 +41,7 @@ function App() {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/tv-shows" element={<TVShows />} />
         <Route path="/community-guidelines" element={<CommunityGuidelines />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
       </Routes>
       <Footer />
     </WatchlistProvider>

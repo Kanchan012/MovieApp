@@ -92,7 +92,7 @@ const Footer: React.FC = () => {
                 <NavLink to="/community-guidelines">Community Guidelines</NavLink>
               </li>
               <li>
-                <NavLink to="#">Terms of Service</NavLink>
+                <NavLink to="/terms-of-service">Terms of Service</NavLink>
               </li>
               <li>
                 <NavLink to="#">Privacy Policy</NavLink>
