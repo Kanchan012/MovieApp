@@ -6,6 +6,7 @@ interface MoviesState {
     trending: TrendingItem[];
     latest: TrendingItem[];
     upcoming: TrendingItem[];
+    tvShows: TrendingItem[];
     loading: boolean;
     error: string | null;
 }
@@ -14,6 +15,7 @@ const initialState: MoviesState = {
     trending: [],
     latest: [],
     upcoming: [],
+    tvShows: [],
     loading: false,
     error: null,
 };
@@ -31,6 +33,9 @@ const moviesSlice = createSlice({
         setUpcoming: (state, action: PayloadAction<TrendingItem[]>) => {
             state.upcoming = action.payload;
         },
+         setTVShows: (state, action: PayloadAction<TrendingItem[]>) => {
+            state.tvShows = action.payload;
+        },
         setLoading: (state, action: PayloadAction<boolean>) => {
             state.loading = action.payload;
         },
@@ -40,5 +45,5 @@ const moviesSlice = createSlice({
     },
 });
 
-export const { setTrending, setLatest, setUpcoming, setLoading, setError } = moviesSlice.actions;
+export const { setTrending, setLatest, setUpcoming, setTVShows,  setLoading, setError } = moviesSlice.actions;
 export default moviesSlice.reducer;
