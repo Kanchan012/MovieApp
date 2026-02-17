@@ -95,7 +95,7 @@ const Footer: React.FC = () => {
                 <NavLink to="/terms-of-service">Terms of Service</NavLink>
               </li>
               <li>
-                <NavLink to="#">Privacy Policy</NavLink>
+                <NavLink to="/privacy-policy">Privacy Policy</NavLink>
               </li>
             </ul>
           </div>
