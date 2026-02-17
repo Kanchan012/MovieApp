@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from './hooks';
-import { setTrending, setLatest, setUpcoming, setLoading, setError } from './slices/movieSlice';
-import { fetchTrending, fetchLatestMovies, fetchUpcomingMovies } from '../services/tmdbApi';
+import { setTrending, setLatest, setUpcoming,setTVShows, setLoading, setError } from './slices/movieSlice';
+import { fetchTrending, fetchLatestMovies, fetchUpcomingMovies , fetchTVShows} from '../services/tmdbApi';
 
 export const useMovies = () => {
     const dispatch = useAppDispatch();
@@ -45,6 +45,19 @@ export const useMovies = () => {
         }
     };
 
+      const getTVShows = async () => {
+        try {
+            dispatch(setLoading(true));
+            const data = await fetchTVShows();
+            dispatch(setTVShows(data.results));
+            dispatch(setError(null));
+        } catch {
+            dispatch(setError("Failed to fetch TV shows."));
+        } finally {
+            dispatch(setLoading(false));
+        }
+    };
+
     const getHomeMovies = async () => {
         try {
             dispatch(setLoading(true));
@@ -69,11 +82,13 @@ export const useMovies = () => {
         trending: moviesState.trending,
         latest: moviesState.latest,
         upcoming: moviesState.upcoming,
+        tvShows: moviesState.tvShows,
         loading: moviesState.loading,
         error: moviesState.error,
         getTrending,
         getLatest,
         getUpcoming,
+        getTVShows,
         getHomeMovies,
     };
 };
