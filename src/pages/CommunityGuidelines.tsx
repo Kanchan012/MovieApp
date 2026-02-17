@@ -1,4 +1,5 @@
 import React from "react";
+import "./Support.css";
 import { FaUsers, FaExclamationTriangle, FaPenFancy, FaBan } from "react-icons/fa";
 
 const CommunityGuidelines: React.FC = () => {

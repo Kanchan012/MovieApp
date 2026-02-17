@@ -89,7 +89,7 @@ const Footer: React.FC = () => {
             <h3>Support</h3>
             <ul>
               <li>
-                <NavLink to="#">Community Guidelines</NavLink>
+                <NavLink to="/community-guidelines">Community Guidelines</NavLink>
               </li>
               <li>
                 <NavLink to="#">Terms of Service</NavLink>
