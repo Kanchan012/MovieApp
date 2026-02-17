@@ -14,6 +14,7 @@ import SearchResults from "./pages/SearchResults";
 import TechStack from "./pages/TechStack";
 import FAQ from "./pages/FAQ";
 import ContactUs from "./pages/ContactUs";
+import TVShows from "./pages/TVShows";
 import { WatchlistProvider } from "./context/WatchlistContext";
 import { ToastContainer } from "react-toastify";
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="/tech-stack" element={<TechStack />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/tv-shows" element={<TVShows />} />
       </Routes>
       <Footer />
     </WatchlistProvider>
