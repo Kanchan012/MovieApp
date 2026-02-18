@@ -1,4 +1,15 @@
+import axios from 'axios';
+
 const BASE_URL = "https://api.themoviedb.org/3";
+const token = import.meta.env.VITE_TMDB_TOKEN;
+
+const axiosInstance = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    Authorization: `Bearer ${token}`,
+    accept: "application/json",
+  },
+});
 
 export interface TrendingItem {
   id: number;
@@ -12,23 +23,8 @@ export interface TrendingResponse {
 }
 
 export async function fetchTrending(): Promise<TrendingResponse> {
-  const token = import.meta.env.VITE_TMDB_TOKEN;
-
-  const response = await fetch(
-    `${BASE_URL}/trending/all/day?language=en-US`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        accept: "application/json",
-      },
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error("TMDB fetch failed");
-  }
-
-  return response.json();
+  const response = await axiosInstance.get<TrendingResponse>("/trending/all/day?language=en-US");
+  return response.data;
 }
 
 export interface MovieDetail {
@@ -61,106 +57,35 @@ export interface MovieReviewsResponse {
 }
 
 export async function fetchLatestMovies(): Promise<TrendingResponse> {
-  const token = import.meta.env.VITE_TMDB_TOKEN;
-
-  const response = await fetch(`${BASE_URL}/movie/now_playing?language=en-US&page=1`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      accept: "application/json",
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error("TMDB fetch now playing failed");
-  }
-
-  return response.json();
+  const response = await axiosInstance.get<TrendingResponse>("/movie/now_playing?language=en-US&page=1");
+  return response.data;
 }
+
 export async function fetchUpcomingMovies(): Promise<TrendingResponse> {
-  const token = import.meta.env.VITE_TMDB_TOKEN;
-
-  const response = await fetch(`${BASE_URL}/movie/upcoming?language=en-US&page=1`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      accept: "application/json",
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error("TMDB fetch upcoming failed");
-  }
-
-  return response.json();
+  const response = await axiosInstance.get<TrendingResponse>("/movie/upcoming?language=en-US&page=1");
+  return response.data;
 }
+
 export async function fetchMovieDetails(movieId: string): Promise<MovieDetail> {
-  const token = import.meta.env.VITE_TMDB_TOKEN;
-
-  const response = await fetch(`${BASE_URL}/movie/${movieId}?language=en-US`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      accept: "application/json",
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error("TMDB fetch movie details failed");
-  }
-
-  return response.json();
+  const response = await axiosInstance.get<MovieDetail>(`/movie/${movieId}?language=en-US`);
+  return response.data;
 }
 
 export async function fetchMovieReviews(movieId: string): Promise<MovieReviewsResponse> {
-  const token = import.meta.env.VITE_TMDB_TOKEN;
-
-  const response = await fetch(`${BASE_URL}/movie/${movieId}/reviews?language=en-US&page=1`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      accept: "application/json",
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error("TMDB fetch movie reviews failed");
-  }
-
-  return response.json();
+  const response = await axiosInstance.get<MovieReviewsResponse>(`/movie/${movieId}/reviews?language=en-US&page=1`);
+  return response.data;
 }
 
 export async function searchMovies(query: string): Promise<TrendingResponse> {
-  const token = import.meta.env.VITE_TMDB_TOKEN;
-
-  const response = await fetch(
-    `${BASE_URL}/search/movie?query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=1`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        accept: "application/json",
-      },
-    }
+  const response = await axiosInstance.get<TrendingResponse>(
+    `/search/movie?query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=1`
   );
-
-  if (!response.ok) {
-    throw new Error("TMDB search movies failed");
-  }
-
-  return response.json();
+  return response.data;
 }
+
 export async function fetchTVShows(): Promise<TrendingResponse> {
-  const token = import.meta.env.VITE_TMDB_TOKEN;
-
-  const response = await fetch(
-    `${BASE_URL}/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        accept: "application/json",
-      },
-    }
+  const response = await axiosInstance.get<TrendingResponse>(
+    "/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=1&sort_by=popularity.desc"
   );
-
-  if (!response.ok) {
-    throw new Error("TMDB fetch TV shows failed");
-  }
-
-  return response.json();
+  return response.data;
 }
