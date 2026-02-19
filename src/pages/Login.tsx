@@ -4,9 +4,12 @@ import loginimg from "../assets/loginimg.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { LuHeartHandshake } from "react-icons/lu";
 import AuthLayout from "../components/common/AuthLayout";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/slices/authSlice";
 
 function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [showFlag, setShowFlag] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -29,6 +32,13 @@ function Login() {
       if (formData.email === userData.email && formData.password === userData.password) {
         setShowFlag(true);
         localStorage.setItem('isLoggedIn', 'true');
+         dispatch(login({
+          name: userData.name,
+          email: userData.email,
+          bio: userData.bio,
+          moviesWatched: userData.moviesWatched,
+          avatar: userData.avatar
+        }));
         window.dispatchEvent(new Event('authChange'));
 
         alert("Login Successful! \n\nFLAG: MOVIEAPP{LOGIN_SUCCESS_2026}");
