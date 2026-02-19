@@ -2,31 +2,25 @@ import { FaSearch } from "react-icons/fa";
 import { IoBookmarksSharp } from "react-icons/io5";
 import Logo from "./common/Logo";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useAppSelector, useAppDispatch  } from "../redux/hooks";
+import { useState } from "react";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { setSearchQuery } from "../redux/slices/searchSlice";
+import { logout } from "../redux/slices/authSlice";
 import "./Header.css";
 
 const Header: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [searchQuery, setSearchQueryLocal] = useState("");
-  const navigate = useNavigate();
+  const auth = useAppSelector((state) => state.auth);
+  const isLoggedInRedux = auth.isLoggedIn;
+  const user = auth.user;
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const watchlist = useAppSelector((state) => state.watchlist.items);
+  const [searchQuery, setSearchQueryLocal] = useState("");
 
-  useEffect(() => {
-    const checkAuth = () => {
-      setIsLoggedIn(localStorage.getItem('isLoggedIn') === 'true');
-    };
-
-    checkAuth();
-    window.addEventListener('authChange', checkAuth);
-    return () => window.removeEventListener('authChange', checkAuth);
-  }, []);
 
   const handleLogout = () => {
+    dispatch(logout());
     localStorage.removeItem('isLoggedIn');
-    setIsLoggedIn(false);
     navigate('/login');
   };
 
@@ -37,6 +31,7 @@ const Header: React.FC = () => {
       navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
     }
   };
+
   return (
     <header className="header">
       <div className="header-container">
@@ -56,7 +51,6 @@ const Header: React.FC = () => {
             onChange={(e) => setSearchQueryLocal(e.target.value)}
           />
         </form>
-
 
         <nav className="nav-links">
           <NavLink to="/trending" className="nav-item">
@@ -78,11 +72,11 @@ const Header: React.FC = () => {
         </NavLink>
 
         <div className="btn-group">
-          {isLoggedIn ? (
+          {isLoggedInRedux ? (
             <>
               <NavLink to="/profile" className="profile-link">
                 <img
-                  src={JSON.parse(localStorage.getItem('userData') || '{}').avatar || ''}
+                  src={user?.avatar || ''}
                   alt="Profile"
                   className="header-profile-avatar"
                 />
@@ -90,6 +84,7 @@ const Header: React.FC = () => {
               </NavLink>
               <button className="logout-header-btn" onClick={handleLogout}>Logout</button>
             </>
+
           ) : (
             <>
               <NavLink to="/login">
