@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { useNavigate} from 'react-router-dom';
-import { FaCamera, FaEdit, FaSave, FaTimes} from 'react-icons/fa';
-import { useAppSelector } from '../redux/hooks';
+import { useNavigate } from 'react-router-dom';
+import { FaCamera, FaEdit, FaSave, FaTimes } from 'react-icons/fa';
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { logout, updateUser } from '../redux/slices/authSlice';
 import './Profile.css';
 
 const Profile: React.FC = () => {
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const watchlist = useAppSelector((state) => state.watchlist.items);
-    const storedUser = localStorage.getItem('userData');
-    const initialUser = storedUser ? JSON.parse(storedUser) : {
+    const user = useAppSelector((state) => state.auth.user);
+    const initialUser = user || {
         name: "Guest",
         email: "guest@example.com",
         bio: "Movie enthusiast and critic.",
@@ -16,35 +18,48 @@ const Profile: React.FC = () => {
         avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Guest"
     };
 
-    const [user, setUser] = useState(initialUser);
+    const [localUser, setLocalUser] = useState(initialUser);
     const [isEditing, setIsEditing] = useState(false);
-    const [tempBio, setTempBio] = useState(user.bio || "");
-    const [tempName, setTempName] = useState(user.name);
+    const [tempBio, setTempBio] = useState(localUser.bio || "");
+    const [tempName, setTempName] = useState(localUser.name);
+
 
     const handleLogout = () => {
+        dispatch(logout());
         localStorage.removeItem('isLoggedIn');
         window.dispatchEvent(new Event('authChange'));
         navigate('/login');
     };
+
 
     const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-                const updatedUser = { ...user, avatar: reader.result as string };
-                setUser(updatedUser);
-                localStorage.setItem('userData', JSON.stringify(updatedUser));
-                window.dispatchEvent(new Event('authChange'));
+                const avatar = reader.result as string;
+                dispatch(updateUser({ avatar }));
+                setLocalUser(prev => ({ ...prev, avatar }));
+
+                const stored = localStorage.getItem('userData');
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    localStorage.setItem('userData', JSON.stringify({ ...parsed, avatar }));
+                }
             };
             reader.readAsDataURL(file);
         }
     };
 
     const handleSaveProfile = () => {
-        const updatedUser = { ...user, name: tempName, bio: tempBio };
-        setUser(updatedUser);
-        localStorage.setItem('userData', JSON.stringify(updatedUser));
+        dispatch(updateUser({ name: tempName, bio: tempBio }));
+        setLocalUser(prev => ({ ...prev, name: tempName, bio: tempBio }));
+
+        const stored = localStorage.getItem('userData');
+        if (stored) {
+            const parsed = JSON.parse(stored);
+            localStorage.setItem('userData', JSON.stringify({ ...parsed, name: tempName, bio: tempBio }));
+        }
         setIsEditing(false);
     };
 
@@ -54,10 +69,11 @@ const Profile: React.FC = () => {
                 <aside className="profile-sidebar">
                     <div className="profile-card">
                         <div className="profile-avatar-wrapper">
-                            <img src={user.avatar} alt="Profile Avatar" className="profile-avatar" />
+                            <img src={localUser.avatar} alt="Profile Avatar" className="profile-avatar" />
                             <label htmlFor="photo-upload" className="photo-edit-overlay">
                                 <FaCamera />
                             </label>
+
                             <input
                                 type="file"
                                 id="photo-upload"
@@ -89,19 +105,20 @@ const Profile: React.FC = () => {
                                 </div>
                             ) : (
                                 <>
-                                    <h1>{user.name}</h1>
-                                    <span className="profile-email">{user.email}</span>
-                                    <p className="profile-bio">{user.bio || "No bio yet."}</p>
+                                    <h1>{localUser.name}</h1>
+                                    <span className="profile-email">{localUser.email}</span>
+                                    <p className="profile-bio">{localUser.bio || "No bio yet."}</p>
                                     <button className="edit-profile-btn" onClick={() => setIsEditing(true)}>
                                         <FaEdit /> Edit Profile
                                     </button>
                                 </>
+
                             )}
                         </div>
 
                         <div className="profile-stats">
                             <div className="stat-item">
-                                <span>{user.moviesWatched || 0}</span>
+                                <span>{localUser.moviesWatched || 0}</span>
                                 <label>Watched</label>
                             </div>
                             <div className="stat-item">
@@ -109,6 +126,7 @@ const Profile: React.FC = () => {
                                 <label>Watchlist</label>
                             </div>
                         </div>
+
 
                         <div className="profile-actions">
                             <button className="logout-btn" onClick={handleLogout}>Logout</button>
