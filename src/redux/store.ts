@@ -5,12 +5,14 @@ import moviesReducer from "./slices/movieSlice.ts";
 import watchlistReducer from "./slices/watchlistSlice.ts";
 import reviewsReducer from "./slices/reviewsSlice.ts";
 import searchReducer from "./slices/searchSlice.ts";
+import authReducer from "./slices/authSlice.ts";
 
 const rootReducer = combineReducers({
     movies: moviesReducer,
     watchlist: watchlistReducer,
     reviews: reviewsReducer,
     search: searchReducer,
+    auth: authReducer,
 });
 
 const persistConfig = {
