@@ -19,7 +19,7 @@ const persistConfig = {
     key: 'root',
     version: 1,
     storage,
-    whitelist: ['watchlist', 'movies'],
+    whitelist: ['watchlist', 'movies', 'auth'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
