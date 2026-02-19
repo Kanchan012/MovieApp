@@ -29,6 +29,10 @@ function Login() {
 
     if (storedUser) {
       const userData = JSON.parse(storedUser);
+      if (!formData.email.toLowerCase().endsWith('@gmail.com')) {
+        setError('Only Gmail addresses (@gmail.com) are allowed.');
+        return;
+      }
       if (formData.email === userData.email && formData.password === userData.password) {
         setShowFlag(true);
         localStorage.setItem('isLoggedIn', 'true');

@@ -20,6 +20,10 @@ function Register() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+      if (!formData.email.toLowerCase().endsWith('@gmail.com')) {
+        alert('Only Gmail addresses (@gmail.com) are allowed.');
+        return;
+      }
     const userData = {
       name: formData.username,
       email: formData.email,
